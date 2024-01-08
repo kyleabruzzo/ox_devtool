@@ -12,4 +12,9 @@ shared_script {
 }
 
 
-client_script "client/*.lua"
+client_scripts {
+    "client/*.lua"
+}
+server_scripts {
+    "server/*.lua"
+}

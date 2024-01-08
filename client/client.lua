@@ -73,6 +73,27 @@ lib.registerMenu({
         lib.showMenu('ox_devtool')
     end
 end)
+lib.registerMenu({
+    id = 'propmenu',
+    title = 'Props',
+    position = 'bottom-right',
+    options = {
+        { label = 'Prop Finder', description = 'Find props in area' },
+        { label = 'Go Back', icon = 'arrow-left', description = 'Return To Main Menu' },
+    },
+
+}, function(selected, scrollIndex, args)
+    if selected == 1 then
+        local input = lib.inputDialog('Insert Prop Name', {'Model name'})
+        if input and input[1] then
+            TriggerEvent('searchObject', input[1])
+        else
+            notify("prop", "Prop", "Input is empty. Please provide a valid input.", "error", "red")
+        end
+    elseif selected == 2 then
+        lib.showMenu('ox_devtool')
+    end
+end)
 
 lib.registerMenu({
     id = 'ox_devtool',
@@ -86,20 +107,21 @@ lib.registerMenu({
     options = {
         { label = 'Rockstar Editor Tool',      description = 'Recording Tools' },
         { label = 'Coordinates',      description = 'All coordinates' },
+        { label = 'Props Tools',      description = 'Prop Tools' },
     }
 }, function(selected, scrollIndex, args)
     if selected == 1 then
         lib.showMenu('rockstareditor')
     elseif selected == 2 then
         lib.showMenu('coordsmenu')
+    elseif selected == 3 then
+        lib.showMenu('propmenu')
     end
 end)
 
-
-
-
-
+   
 RegisterKeyMapping('+editor', 'Open The DevTool', 'keyboard', 'F5')
 RegisterCommand('+editor', function()
-    lib.showMenu('ox_devtool')
+    print("commando check f5")
+    TriggerServerEvent("ox_devtool:canopen")
 end)
