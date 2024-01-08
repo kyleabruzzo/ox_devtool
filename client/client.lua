@@ -73,12 +73,46 @@ lib.registerMenu({
         lib.showMenu('ox_devtool')
     end
 end)
+
+
+lib.registerMenu({
+    id = 'propspawner',
+    title = 'Props Spawner',
+    position = 'bottom-right',
+    options = {
+        { label = 'Prop Spawn', description = 'Find props in area' },
+        { label = 'Clear Prop', description = 'Clear The Props' },
+        { label = 'Go Back', icon = 'arrow-left', description = 'Return To Prop Menu' },
+    },
+}, function(selected, scrollIndex, args)
+    if selected == 1 then
+        local input = lib.inputDialog('Insert Prop Name', {'Model name'})
+        if input and input[1] then
+            local data =  { objname = input[1] }    
+            TriggerEvent("objectspawn", data)
+        else
+            notify("prop", "Prop", "Input is empty. Please provide a valid input.", "error", "red")
+        end
+    elseif selected == 2 then
+        local inputdel = lib.inputDialog('Prop to delete', {'Model'})
+        if inputdel and inputdel[1] then
+            local data = { objname = inputdel[1] }  
+            TriggerEvent("deleteobject", data)
+        else
+            notify("prop", "Prop", "Input is empty. Please provide a valid input.", "error", "red")
+        end
+    elseif selected == 3 then
+        lib.showMenu('propmenu')
+    end
+end)
+
 lib.registerMenu({
     id = 'propmenu',
     title = 'Props',
     position = 'bottom-right',
     options = {
         { label = 'Prop Finder', description = 'Find props in area' },
+        { label = 'Prop Spawner', description = 'Open Prop Spawner Menu' },
         { label = 'Go Back', icon = 'arrow-left', description = 'Return To Main Menu' },
     },
 
@@ -91,9 +125,33 @@ lib.registerMenu({
             notify("prop", "Prop", "Input is empty. Please provide a valid input.", "error", "red")
         end
     elseif selected == 2 then
+        lib.showMenu('propspawner')
+    elseif selected == 3 then
         lib.showMenu('ox_devtool')
     end
 end)
+lib.registerMenu({
+    id = 'carmenu',
+    title = 'Car Menu',
+    position = 'bottom-right',
+    options = {
+        { label = 'Debug Car', description = 'Car Info' },
+        { label = 'Repair Car', description = 'Open Prop Spawner Menu' },
+        { label = 'Go Back', icon = 'arrow-left', description = 'Return To Main Menu' },
+    },
+
+}, function(selected, scrollIndex, args)
+    if selected == 1 then
+        TriggerEvent('drawCarinfo')
+    elseif selected == 2 then
+        TriggerEvent('repairCar')
+        
+    elseif selected == 3 then
+        lib.showMenu('ox_devtool')
+    end
+end)
+
+
 
 lib.registerMenu({
     id = 'ox_devtool',
@@ -108,6 +166,7 @@ lib.registerMenu({
         { label = 'Rockstar Editor Tool',      description = 'Recording Tools' },
         { label = 'Coordinates',      description = 'All coordinates' },
         { label = 'Props Tools',      description = 'Prop Tools' },
+        { label = 'Vehicle Information',      description = 'title' },
     }
 }, function(selected, scrollIndex, args)
     if selected == 1 then
@@ -116,6 +175,9 @@ lib.registerMenu({
         lib.showMenu('coordsmenu')
     elseif selected == 3 then
         lib.showMenu('propmenu')
+    elseif selected == 4 then
+        lib.showMenu('carmenu')
+        
     end
 end)
 
