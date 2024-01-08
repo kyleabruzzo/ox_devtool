@@ -122,6 +122,6 @@ end)
    
 RegisterKeyMapping('+editor', 'Open The DevTool', 'keyboard', 'F5')
 RegisterCommand('+editor', function()
-    print("commando check f5")
+
     TriggerServerEvent("ox_devtool:canopen")
 end)

@@ -136,7 +136,7 @@ end
 RegisterNetEvent('ox_devltool:canopenyes')
 AddEventHandler('ox_devltool:canopenyes', function()
     Isallowed()
-    print("è ok il bro")
+
 end)
 
 AddEventHandler('onResourceStop', function(resourceName)
